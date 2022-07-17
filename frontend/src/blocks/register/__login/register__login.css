@@ -1,0 +1,17 @@
+.register__login {
+  margin: 15px 0 0;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+}
+
+@media(max-width: 320px) {
+  .register__login {
+    margin-top: 20px;
+  }
+}
+
+.register__login a {
+  color: #fff;
+  text-decoration: none;
+}

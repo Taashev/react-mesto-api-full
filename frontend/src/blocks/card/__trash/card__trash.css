@@ -1,0 +1,11 @@
+.card__trash {
+  width: 18px;
+  height: 19px;
+  padding: 0;
+  border: none;
+  background: url(../../../images/ico/trash.svg) no-repeat center/cover;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  outline: none;
+}

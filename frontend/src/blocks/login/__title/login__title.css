@@ -1,0 +1,9 @@
+.login__title {
+  margin: 60px 0 50px;
+}
+
+@media(max-width: 424px) {
+  .login__title {
+    margin: 40px 0;
+  }
+}

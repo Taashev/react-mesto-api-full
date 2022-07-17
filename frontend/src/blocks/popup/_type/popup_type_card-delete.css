@@ -1,0 +1,10 @@
+.popup_type_card-delete {
+}
+
+.popup_type_card-delete .popup__title {
+  margin: 0 0 38px;
+}
+
+.popup_type_card-delete .popup__button {
+  margin: 0;
+}

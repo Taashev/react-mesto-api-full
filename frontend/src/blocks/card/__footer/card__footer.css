@@ -1,0 +1,12 @@
+.card__footer {
+  box-sizing: border-box;
+  padding: 0px 21px;
+  background: #fff;
+  border-radius: 0 0 10px 10px;
+  display: grid;
+  grid-template-rows: 80px;
+  grid-template-columns: 1fr 22px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}

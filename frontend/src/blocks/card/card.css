@@ -1,0 +1,10 @@
+.card {
+  box-sizing: border-box;
+  padding-top: 51px;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    padding-top: 33px;
+  }
+}

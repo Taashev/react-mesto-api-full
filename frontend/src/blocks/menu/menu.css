@@ -1,0 +1,41 @@
+.menu {
+  transition: .1s;
+}
+
+.menu__email {
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.22;
+}
+
+.menu__link {
+  font-size: 18px;
+  line-height: 1.22;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media(max-width: 630px) {
+  .menu {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+    position: absolute;
+    top: -100%;
+    left: 0;
+  }
+
+  .menu_open {
+    top: 0;
+  }
+
+  .menu__email {
+    margin: 0;
+  }
+}

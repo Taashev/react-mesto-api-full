@@ -1,0 +1,31 @@
+.form__input {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 0 0 8px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #CCC;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #fff;
+}
+
+.form__input::placeholder {
+  color: #CCC;
+}
+
+.form__input:focus::placeholder {
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.form__input:-webkit-autofill,
+.form__input:-webkit-autofill:hover,
+.form__input:-webkit-autofill:focus,
+.form__input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #000 inset;
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+}

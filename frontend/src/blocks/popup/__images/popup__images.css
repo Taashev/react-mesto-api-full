@@ -1,0 +1,7 @@
+.popup__images {
+  order: -1;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: center;
+}

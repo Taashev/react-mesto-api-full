@@ -1,0 +1,31 @@
+.popup__input {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 0px 0px 8px 0px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-size: 14px;
+  line-height: 1.21;
+  font-weight: 400;
+  color: #000;
+}
+
+.popup__input::placeholder {
+  color: #C4C4C4;
+}
+
+.popup__input:focus::placeholder {
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.popup__input:-webkit-autofill,
+.popup__input:-webkit-autofill:hover,
+.popup__input:-webkit-autofill:focus,
+.popup__input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #fff inset;
+  -webkit-text-fill-color: #000;
+  caret-color: #000;
+}

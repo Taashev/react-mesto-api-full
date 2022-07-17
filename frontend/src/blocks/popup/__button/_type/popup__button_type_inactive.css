@@ -1,0 +1,10 @@
+.popup__button_type_inactive {
+  color: #000;
+  background: transparent;
+  opacity: .2;
+  cursor: initial;
+}
+
+.popup__button_type_inactive:hover {
+  opacity: .2;
+}

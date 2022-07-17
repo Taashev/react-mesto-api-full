@@ -1,0 +1,23 @@
+.page {
+  /* Контейнер */
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 880px;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0 auto;
+  /* Основные настройки страницы */
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background-color: #000;
+  /* Настройки основго шрифта страницы */
+  font-size: 24px;
+  font-weight: 400;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
