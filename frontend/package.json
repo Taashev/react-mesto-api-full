@@ -1,7 +1,7 @@
 {
   "name": "react-mesto-auth",
   "version": "0.1.0",
-  "homepage": "https://taashev.github.io/react-mesto-auth/",
+  "homepage": "https://http://mesto.taashev.nomoredomains.xyz",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -19,7 +19,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* admin@51.250.80.29:/home/admin/praktikum/mesto-frontend"
+
   },
   "eslintConfig": {
     "extends": [
