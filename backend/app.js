@@ -12,6 +12,7 @@ const auth = require('./middlewares/auth');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const { handleError, notFound } = require('./middlewares/handleError');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // connect mestodb
 mongoose.connect('mongodb://localhost:27017/mestodb');
@@ -29,6 +30,9 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// reqest logger
+app.use(requestLogger);
+
 // create user
 app.use('/signup', createUser);
 
@@ -43,6 +47,9 @@ app.use('/users', users);
 
 // cards
 app.use('/cards', cards);
+
+// error logger
+app.use(errorLogger);
 
 // errors
 app.use(errors());
