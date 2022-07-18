@@ -1,5 +1,5 @@
 const request = ({ path, method = 'GET', headers, body }) => {
-  return fetch(`https://auth.nomoreparties.co/${ path }`, {
+  return fetch(`http://localhost:3001/${ path }`, {
     method: method,
     headers: {
       'Accept': 'application/json',
@@ -9,8 +9,11 @@ const request = ({ path, method = 'GET', headers, body }) => {
     body: JSON.stringify(body)
   })
     .then(res => {
+
+      console.log(res.json());
+
       if (res.ok) {
-        return res.json();
+        return;
       }
 
       return res.json()
@@ -25,6 +28,7 @@ export const register = (password, email) => {
     path: 'signup',
     method: 'POST',
     headers: {},
+    credentials: 'include',
     body: { password: password, email: email }
   })
 };
@@ -34,13 +38,14 @@ export const authorize = (password, email) => {
     path: 'signin',
     method: 'POST',
     headers: {},
+    credentials: 'include',
     body: { password: password, email: email }
   })
 };
 
-export const getContent = (token) => {
-  return request({
-    path: 'users/me',
-    headers: { 'Authorization': `Bearer ${token}`}
-  })
-};
+// export const getContent = (token) => {
+//   return request({
+//     path: 'users/me',
+//     headers: { 'Authorization': `Bearer ${token}`}
+//   })
+// };

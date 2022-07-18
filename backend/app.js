@@ -13,6 +13,7 @@ const users = require('./routes/users');
 const cards = require('./routes/cards');
 const { handleError, notFound } = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { cors } = require('./middlewares/cors');
 
 // connect mestodb
 mongoose.connect('mongodb://localhost:27017/mestodb');
@@ -20,8 +21,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 // app express
 const app = express();
 
-// PORT 3000
-const { PORT = 3000 } = process.env;
+// PORT
+const { PORT = 3001 } = process.env; //!!
 
 // cookie parser
 app.use(cookieParser());
@@ -32,6 +33,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // reqest logger
 app.use(requestLogger);
+
+// cors
+app.use(cors);
 
 // create user
 app.use('/signup', createUser);

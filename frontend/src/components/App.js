@@ -163,16 +163,16 @@ function App() {
 
   // check token
   function checkToken() {
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
 
-    if(token) {
-      auth.getContent(token)
-        .then((res) => {
-          setEmail(res.data.email)
-          setLoggedIn(true);
-          history.push('/');
-        })
-    }
+    // if(token) {
+    //   auth.getContent(token)
+    //     .then((res) => {
+    //       setEmail(res.data.email)
+    //       setLoggedIn(true);
+    //       history.push('/');
+    //     })
+    // }
   }
 
   // on sign out
