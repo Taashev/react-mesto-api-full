@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+require('dotenv').config();
 
 // import my modules
 const login = require('./routes/login');
