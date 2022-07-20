@@ -166,6 +166,12 @@ function App() {
         setCurrentUser(res);
         history.push('/');
       })
+
+    api.getCards()
+      .then((res) => {
+        setCards(res.map(card => card).reverse());
+      })
+      .catch(err => console.error(`Ошибка: ${ err }`))
   }
 
   // on sign out
