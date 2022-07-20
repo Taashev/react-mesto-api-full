@@ -20,8 +20,6 @@ function Main({
 }) {
   const { avatar, name, about } = useContext(CurrentUserContext);
 
-  console.log(avatar, name, about)
-
   return (
     <>
       <Header stateMenu={ stateMenu }>

@@ -38,7 +38,7 @@ function App() {
 
   // card like
   function handleCardLike(card) {
-    const isLiked = card.likes.some(like => like._id === currentUser._id);
+    const isLiked = card.likes.some(like => like === currentUser._id);
 
     if(!isLiked) {
       api.addLike(card._id)
@@ -99,7 +99,6 @@ function App() {
   function handleUpdateUser({ name, about }, setLoader, nameBtn) {
     api.setUserInfo(name, about)
       .then(res => {
-        console.log('handleUpdataUser')
         setCurrentUser(res);
         closeAllPopups();
         setLoader(nameBtn);
@@ -169,8 +168,9 @@ function App() {
   function checkToken() {
     auth.getContent()
       .then((res) => {
-        setEmail(res.data.email);
+        setEmail(res.email);
         setLoggedIn(true);
+        setCurrentUser(res);
         history.push('/');
       })
 
@@ -219,12 +219,10 @@ function App() {
         return getCards;
       })
       .then(res => {
-        setCards(res.map(card => card));
+        setCards(res.map(card => card).reverse());
       })
       .catch(err => console.error(`Ошибка: ${ err }`))
   }, [])
-
-  console.log('currentUser', currentUser);
 
   return (
     <CurrentUserContext.Provider value={ currentUser }>

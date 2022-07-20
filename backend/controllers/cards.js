@@ -76,6 +76,7 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: userId } },
     { new: true },
   )
+    .populate('owner')
     .then((card) => {
       if (!card) {
         return next(new NotFoundError(messageError.cardNotFound));
@@ -102,6 +103,7 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: userId } },
     { new: true },
   )
+    .populate('owner')
     .then((card) => {
       if (!card) {
         return next(new NotFoundError(messageError.cardNotFound));

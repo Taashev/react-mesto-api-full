@@ -21,13 +21,11 @@ const login = (req, res, next) => {
         sameSite: 'none',
         secure: true,
       }).send({
-        data: {
-          email: user.email,
-          name: user.name,
-          about: user.about,
-          avatar: user.avatar,
-          _id: user._id,
-        },
+        email: user.email,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
       }).end();
     })
     .catch(next);
@@ -59,13 +57,11 @@ const createUser = (req, res, next) => {
       avatar,
     }))
     .then((user) => res.status(201).send({
-      data: {
-        email: user.email,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      },
+      email: user.email,
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      _id: user._id,
     }))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'Error') {
@@ -115,7 +111,7 @@ const getUserInfo = (req, res, next) => {
   const userId = req.user.id;
 
   User.findById(userId)
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
