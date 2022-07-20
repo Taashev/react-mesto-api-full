@@ -1,51 +1,58 @@
-const request = ({ path, method = 'GET', headers, body }) => {
-  return fetch(`http://localhost:3001/${ path }`, {
-    method: method,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      ...headers
-    },
-    body: JSON.stringify(body)
+const baseUrl = `${window.location.protocol}//${process.env.REACT_APP_API_URL || 'localhost:3001'}`;
+
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+
+  return res.json()
+  .then(data => {
+    throw new Error(data?.error || data.message);
   })
-    .then(res => {
-
-      console.log(res.json());
-
-      if (res.ok) {
-        return;
-      }
-
-      return res.json()
-        .then(data => {
-          throw new Error(data?.error || data.message);
-        })
-    })
 };
 
 export const register = (password, email) => {
-  return request({
-    path: 'signup',
+  return fetch(`${baseUrl}/signup`, {
     method: 'POST',
-    headers: {},
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
     credentials: 'include',
-    body: { password: password, email: email }
-  })
+    //! withCredentials: true,
+    body: JSON.stringify({password, email})
+  }).then(checkResponse)
 };
 
 export const authorize = (password, email) => {
-  return request({
-    path: 'signin',
+  return fetch(`${baseUrl}/signin`, {
     method: 'POST',
-    headers: {},
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
     credentials: 'include',
-    body: { password: password, email: email }
-  })
+    //! withCredentials: true,
+    body: JSON.stringify({password, email})
+  }).then(checkResponse)
 };
 
-// export const getContent = (token) => {
-//   return request({
-//     path: 'users/me',
-//     headers: { 'Authorization': `Bearer ${token}`}
-//   })
-// };
+export const logout = () => {
+  return fetch(`${baseUrl}/signout`, {
+    method: 'GET',
+    credentials: 'include'
+  }).then(checkResponse)
+};
+
+export const getContent = () => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      //! 'Authorization': `Bearer ${token}`,
+    },
+    credentials: 'include',
+    //! withCredentials: true,
+  }).then(checkResponse)
+};

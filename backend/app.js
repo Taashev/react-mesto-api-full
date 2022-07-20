@@ -4,16 +4,30 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // import my modules
 const login = require('./routes/login');
+const logout = require('./routes/logout');
 const createUser = require('./routes/createUser');
 const auth = require('./middlewares/auth');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const { handleError, notFound } = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { cors } = require('./middlewares/cors');
+
+const options = {
+  origin: [
+    'localhost:3000',
+    'localhost:3001',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'mesto.taashev.nomoredomains.xyz',
+    'http://mesto.taashev.nomoredomains.xyz',
+    'https://mesto.taashev.nomoredomains.xyz',
+  ],
+  credentials: true,
+};
 
 // connect mestodb
 mongoose.connect('mongodb://localhost:27017/mestodb');
@@ -24,6 +38,12 @@ const app = express();
 // PORT
 const { PORT = 3001 } = process.env; //!!
 
+// reqest logger
+app.use(requestLogger);
+
+// cors
+app.use('*', cors(options));
+
 // cookie parser
 app.use(cookieParser());
 
@@ -31,17 +51,14 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// reqest logger
-app.use(requestLogger);
-
-// cors
-app.use(cors);
-
 // create user
 app.use('/signup', createUser);
 
 // login
 app.use('/signin', login);
+
+// logout
+app.use('/signout', logout);
 
 // authorization
 app.use(auth);

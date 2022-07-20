@@ -97,9 +97,9 @@ function App() {
 
   // set user info
   function handleUpdateUser({ name, about }, setLoader, nameBtn) {
-
     api.setUserInfo(name, about)
       .then(res => {
+        console.log('handleUpdataUser')
         setCurrentUser(res);
         closeAllPopups();
         setLoader(nameBtn);
@@ -144,11 +144,15 @@ function App() {
   function handleLogin(password, email) {
     return auth.authorize(password, email)
       .then(res => {
-        if(res.token) {
-          localStorage.setItem('token', res.token);
-          checkToken();
-          return res;
-        }
+        checkToken();
+        return res;
+
+        //! return res;
+        // if(res.token) {
+        //   localStorage.setItem('token', res.token);
+        //   checkToken();
+        //   return res;
+        //! }
       })
   }
 
@@ -163,7 +167,14 @@ function App() {
 
   // check token
   function checkToken() {
-    // const token = localStorage.getItem('token');
+    auth.getContent()
+      .then((res) => {
+        setEmail(res.data.email);
+        setLoggedIn(true);
+        history.push('/');
+      })
+
+    //! const token = localStorage.getItem('token');
 
     // if(token) {
     //   auth.getContent(token)
@@ -172,15 +183,20 @@ function App() {
     //       setLoggedIn(true);
     //       history.push('/');
     //     })
-    // }
+    //! }
   }
 
   // on sign out
   function handleSignOut() {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-    setEmail('');
-    setStateMenu(false);
+    auth.logout()
+      .then((res) => {
+        setLoggedIn(false);
+        setEmail('');
+        setStateMenu(false);
+        setIsInfoTooltips({ isOpen: true, status: true, message: res.message });
+      })
+
+    //! localStorage.removeItem('token');
   }
 
   // handle click burger
@@ -192,7 +208,7 @@ function App() {
   useEffect(() => {
     checkToken();
 
-    // static promise: user information first, then maps
+    // static promise: user information first, then cards
     Promise.all([ api.getUserInfo(), api.getCards() ])
       .then(res => {
         const getUserInfo = res[0];
@@ -207,6 +223,8 @@ function App() {
       })
       .catch(err => console.error(`Ошибка: ${ err }`))
   }, [])
+
+  console.log('currentUser', currentUser);
 
   return (
     <CurrentUserContext.Provider value={ currentUser }>

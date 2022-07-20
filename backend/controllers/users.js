@@ -21,14 +21,23 @@ const login = (req, res, next) => {
         sameSite: 'none',
         secure: true,
       }).send({
-        email: user.email,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
+        data: {
+          email: user.email,
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          _id: user._id,
+        },
       }).end();
     })
     .catch(next);
+};
+
+// logout
+const logout = (req, res) => {
+  res.status(200)
+    .clearCookie('jwt')
+    .send({ message: 'Покасики!' });
 };
 
 // create user
@@ -50,11 +59,13 @@ const createUser = (req, res, next) => {
       avatar,
     }))
     .then((user) => res.status(201).send({
-      email: user.email,
-      name: user.name,
-      about: user.about,
-      avatar: user.avatar,
-      _id: user._id,
+      data: {
+        email: user.email,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+      },
     }))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'Error') {
@@ -104,7 +115,7 @@ const getUserInfo = (req, res, next) => {
   const userId = req.user.id;
 
   User.findById(userId)
-    .then((user) => res.send(user))
+    .then((user) => res.send({ data: user }))
     .catch(next);
 };
 
@@ -155,6 +166,7 @@ const updateAvatar = (req, res, next) => {
 // export
 module.exports = {
   login,
+  logout,
   getUsers,
   getUser,
   getUserInfo,

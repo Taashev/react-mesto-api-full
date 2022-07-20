@@ -9,6 +9,7 @@ class Api {
     return fetch(this._baseUrl + path, {
       method: method || 'GET',
       headers: this._headers,
+      credentials: 'include',
       ...body
     })
       .then(res => {
@@ -21,19 +22,19 @@ class Api {
 
   // get user info
   getUserInfo() {
-    return this._request('users/me')
+    return this._request('/users/me')
   };
 
   // get cards
   getCards() {
-    return this._request('cards')
+    return this._request('/cards')
   };
 
 
   // set user info
   setUserInfo(name, about) {
     return this._request(
-    /* path: */ 'users/me',
+    /* path: */ '/users/me',
     /* method: */ 'PATCH',
     /* body: */ {
       body: JSON.stringify({
@@ -46,7 +47,7 @@ class Api {
   // set card
   setCard(name, link) {
     return this._request(
-      /* path: */ 'cards',
+      /* path: */ '/cards',
       /* method: */ 'POST',
       /* body: */ {
         body: JSON.stringify({
@@ -61,7 +62,7 @@ class Api {
   // delete card
   deleteCard(cardId) {
     return this._request(
-      /* path: */ `cards/${cardId}`,
+      /* path: */ `/cards/${cardId}`,
       /* method: */ 'DELETE'
     )
   };
@@ -69,7 +70,7 @@ class Api {
   // add like
   addLike(cardId) {
     return this._request(
-      /* path: */ `cards/${cardId}/likes`,
+      /* path: */ `/cards/${cardId}/likes`,
       /* method: */ 'PUT'
     )
   };
@@ -77,7 +78,7 @@ class Api {
   // delete like
   deleteLike(cardId) {
     return this._request(
-      /* path: */ `cards/${cardId}/likes`,
+      /* path: */ `/cards/${cardId}/likes`,
       /* method: */ 'DELETE'
     )
   };
@@ -85,7 +86,7 @@ class Api {
   // set user avatar
   setUserAvatar(avatar) {
     return this._request(
-    /* path: */ 'users/me/avatar',
+    /* path: */ '/users/me/avatar',
     /* method: */ 'PATCH',
     /* body: */ {
       body: JSON.stringify({
@@ -97,10 +98,11 @@ class Api {
 
 // api
 const api = new Api({
-  baseUrl: 'https://localhost:3001/',
+  baseUrl: `${window.location.protocol}//${process.env.REACT_APP_API_URL || 'localhost:3001'}`,
   headers: {
-    // authorization: 'b52f2582-d828-40bf-8301-f8f9457aa9d0',
-    'Content-type': 'application/json'
+    'Accept': 'application/json',
+    'Content-type': 'application/json',
+    //! authorization: 'b52f2582-d828-40bf-8301-f8f9457aa9d0',
   }
 });
 
