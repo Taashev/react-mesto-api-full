@@ -57,7 +57,7 @@ function Register({ onInfoTooltip, onRegister }) {
                 type="password"
                 name="registerPassword"
                 placeholder="Пароль"
-                minLength="3"
+                minLength="8"
                 required
                 value={values.registerPassword || ''}
                 onChange={e => onChange(e)}

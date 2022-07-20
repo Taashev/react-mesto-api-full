@@ -61,7 +61,7 @@ function Login({ onLogin, onInfoTooltip }) {
                 type="password"
                 name="loginPassword"
                 placeholder="Пароль"
-                minLength="3"
+                minLength="8"
                 required
                 value={values.loginPassword || ''}
                 onChange={e => onChange(e)}
