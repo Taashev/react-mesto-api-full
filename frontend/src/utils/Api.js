@@ -102,7 +102,6 @@ const api = new Api({
   headers: {
     'Accept': 'application/json',
     'Content-type': 'application/json',
-    //! authorization: 'b52f2582-d828-40bf-8301-f8f9457aa9d0',
   }
 });
 

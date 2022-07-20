@@ -145,13 +145,6 @@ function App() {
       .then(res => {
         checkToken();
         return res;
-
-        //! return res;
-        // if(res.token) {
-        //   localStorage.setItem('token', res.token);
-        //   checkToken();
-        //   return res;
-        //! }
       })
   }
 
@@ -173,17 +166,6 @@ function App() {
         setCurrentUser(res);
         history.push('/');
       })
-
-    //! const token = localStorage.getItem('token');
-
-    // if(token) {
-    //   auth.getContent(token)
-    //     .then((res) => {
-    //       setEmail(res.data.email)
-    //       setLoggedIn(true);
-    //       history.push('/');
-    //     })
-    //! }
   }
 
   // on sign out
@@ -195,8 +177,6 @@ function App() {
         setStateMenu(false);
         setIsInfoTooltips({ isOpen: true, status: true, message: res.message });
       })
-
-    //! localStorage.removeItem('token');
   }
 
   // handle click burger
