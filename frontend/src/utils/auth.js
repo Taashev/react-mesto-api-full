@@ -1,4 +1,4 @@
-const baseUrl = `${window.location.protocol}//${process.env.REACT_APP_API_URL || 'localhost:3001'}`;
+const baseUrl = 'http://localhost:3001';
 
 const checkResponse = (res) => {
   if (res.ok) {

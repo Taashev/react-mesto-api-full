@@ -16,6 +16,7 @@ const users = require('./routes/users');
 const cards = require('./routes/cards');
 const { handleError, notFound } = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const limiter = require('./middlewares/limiter');
 
 const options = {
   origin: [
@@ -38,6 +39,9 @@ const app = express();
 
 // PORT
 const { PORT = 3000 } = process.env;
+
+// rate limit
+app.use(limiter);
 
 // reqest logger
 app.use(requestLogger);
