@@ -95,13 +95,8 @@ const getUser = (req, res, next) => {
   const { userId } = req.params;
 
   User.findById(userId)
-    .then((user) => {
-      if (user === null) {
-        return next(new NotFoundError('Такого пользователя не существует'));
-      }
-
-      return res.send(user);
-    })
+    .orFail(new NotFoundError('Такого пользователя не существует'))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'CastError') {
         return next(new HttpError(messageError.userIdError));

@@ -33,11 +33,8 @@ const deleteCard = (req, res, next) => {
   const { cardId } = req.params;
 
   Card.findById(cardId)
+    .orFail(new NotFoundError(messageError.cardNotFound))
     .then((card) => {
-      if (!card) {
-        return next(new NotFoundError(messageError.cardNotFound));
-      }
-
       const owner = card.owner.toString();
       const userId = req.user.id;
 
@@ -76,14 +73,9 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: userId } },
     { new: true },
   )
+    .orFail(new NotFoundError(messageError.cardNotFound))
     .populate('owner')
-    .then((card) => {
-      if (!card) {
-        return next(new NotFoundError(messageError.cardNotFound));
-      }
-
-      return res.send(card);
-    })
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         return next(new HttpError(messageError.cardIdError));
@@ -103,14 +95,9 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: userId } },
     { new: true },
   )
+    .orFail(new NotFoundError(messageError.cardNotFound))
     .populate('owner')
-    .then((card) => {
-      if (!card) {
-        return next(new NotFoundError(messageError.cardNotFound));
-      }
-
-      return res.send(card);
-    })
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         return next(new HttpError(messageError.cardIdError));
