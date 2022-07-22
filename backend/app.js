@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const helmet = require('helmet');
 require('dotenv').config();
 
 // import my modules
@@ -42,6 +43,9 @@ const { PORT = 3000 } = process.env;
 
 // rate limit
 app.use(limiter);
+
+// helmet
+app.use(helmet());
 
 // reqest logger
 app.use(requestLogger);
