@@ -25,4 +25,4 @@
 
 ## Запуск frontend
 
-`npm run start` - запустить frontend на 3000 порту
+`npm run start` - запустить frontend
